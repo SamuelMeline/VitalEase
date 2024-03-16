@@ -36,6 +36,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    // Nous allons ajouter des propriétés à notre entité Users pour stocker les données d'activité physique. Ces propriétés pourraient inclure des champs tels que dailySteps, caloriesBurned, exerciseTime, etc.
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $dailySteps;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $caloriesBurned;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $exerciseTime;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $sleepTime;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $nutrition;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -118,6 +135,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getDailySteps(): ?int
+    {
+        return $this->dailySteps;
+    }
+
+    public function setDailySteps(?int $dailySteps): self
+    {
+        $this->dailySteps = $dailySteps;
+
+        return $this;
+    }
+
+    public function getCaloriesBurned(): ?int
+    {
+        return $this->caloriesBurned;
+    }
+
+    public function setCaloriesBurned(?int $caloriesBurned): self
+    {
+        $this->caloriesBurned = $caloriesBurned;
+
+        return $this;
+    }
+
+    public function getExerciseTime(): ?int
+    {
+        return $this->exerciseTime;
+    }
+
+    public function setExerciseTime(?int $exerciseTime): self
+    {
+        $this->exerciseTime = $exerciseTime;
+
+        return $this;
+    }
+
+    public function getSleepTime(): ?int
+    {
+        return $this->sleepTime;
+    }
+
+    public function setSleepTime(?int $sleepTime): self
+    {
+        $this->sleepTime = $sleepTime;
+
+        return $this;
+    }
+
+    public function getNutrition(): ?int
+    {
+        return $this->nutrition;
+    }
+
+    public function setNutrition(?int $nutrition): self
+    {
+        $this->nutrition = $nutrition;
 
         return $this;
     }

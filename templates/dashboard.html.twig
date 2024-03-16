@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block body %}
+    <h2>Tableau de Bord</h2>
+
+    <!-- Graphique de suivi de l'activité physique -->
+    <canvas id="activityChart" width="400" height="200"></canvas>
+
+    <script>
+        var ctx = document.getElementById('activityChart').getContext('2d');
+        var activityChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                datasets: [{
+                    label: 'Nombre de pas par jour',
+                    data: [5000, 6000, 5500, 7000, 8000, 7500, 9000],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    {# Graphique de suivi du sommeil #}
+    <canvas id="sleepChart" width="400" height="200"></canvas>
+
+    <script>
+        var ctx = document.getElementById('sleepChart').getContext('2d');
+        var sleepChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                datasets: [{
+                    label: 'Nombre d\'heures de sommeil par jour',
+                    data: [8, 7, 7.5, 8, 7.5, 8, 8.5],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    {# Graphique sur les calories brulées #}
+    <canvas id="caloriesChart" width="400" height="200"></canvas>
+
+    <script>
+        var ctx = document.getElementById('caloriesChart').getContext('2d');
+        var caloriesChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                datasets: [{
+                    label: 'Calories brûlées par jour',
+                    data: [500, 600, 550, 700, 800, 750, 900],
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scale: {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- Section pour afficher les statistiques de l'utilisateur -->
+    <div>
+        <h3>Statistiques</h3>
+        <ul>
+            <li>Nombre total de pas cette semaine : 49 000</li>
+            <li>Calories brûlées aujourd'hui : 700</li>
+            <li>Heures de sommeil moyennes par nuit : 7.5</li>
+        </ul>
+    </div>
+
+    <!-- Section pour afficher les conseils de bien-être -->
+    <div>
+        <h3>Conseils de Bien-être</h3>
+        <p>Voici quelques conseils pour rester en forme :</p>
+        <ul>
+            <li>Mangez équilibré et varié.</li>
+            <li>Faites de l'exercice régulièrement.</li>
+            <li>Assurez-vous de bien dormir chaque nuit.</li>
+            <li>Évitez le stress en pratiquant la méditation ou le yoga.</li>
+        </ul>
+    </div>
+
+    <!-- Section pour afficher les dernières activités de l'utilisateur -->
+    <div>
+        <h3>Dernières activités</h3>
+        <ul>
+            <li>Marche de 30 minutes</li>
+            <li>Course à pied de 45 minutes</li>
+            <li>Yoga de 1 heure</li>
+        </ul>
+    </div>
+
+    <!-- Section pour afficher les dernières mesures de l'utilisateur -->
+    <div>
+        <h3>Dernières mesures</h3>
+        <ul>
+            <li>Nombre de pas : 8 000</li>
+            <li>Calories brûlées : 500</li>
+            <li>Heures de sommeil : 7.5</li>
+        </ul>
+    </div>
+
+{% endblock %}

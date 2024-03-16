@@ -1,0 +1,16 @@
+{# templates/registration/saisie_activite_physique.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Saisie d'activité physique{% endblock %}
+
+{% block body %}
+    <h1>Saisie d'activité physique</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.duree) }}
+        {{ form_row(form.distance) }}
+    {{ form_end(form) }}
+{% endblock %}

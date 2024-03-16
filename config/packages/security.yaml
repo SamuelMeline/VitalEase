@@ -43,6 +43,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/dashboard, roles: ROLE_USER } # Restriction d'accès au tableau de bord aux utilisateurs connectés
 
 when@test:
     security:

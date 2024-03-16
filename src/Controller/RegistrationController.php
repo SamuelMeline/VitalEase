@@ -3,13 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\ActivitePhysique; // Ajout de l'importation de la classe ActivitePhysique
+use App\Form\ActivitePhysiqueType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -23,7 +25,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-                    $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
@@ -38,7 +40,28 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/activite-physique', name: 'app_users_activite_physique', methods: ['GET', 'POST'])]
+    public function saisieActivitePhysique(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $activitePhysique = new ActivitePhysique();
+        $form = $this->createForm(ActivitePhysiqueType::class, $activitePhysique);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Enregistrer les données dans la base de données
+            $entityManager->persist($activitePhysique);
+            $entityManager->flush();
+
+            // Rediriger l'utilisateur vers une autre page ou afficher un message de réussite
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        return $this->render('registration/saisie_activite_physique.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
